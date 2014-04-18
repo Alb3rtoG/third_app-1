@@ -2,36 +2,41 @@ require 'spec_helper'
 
 describe "StaticPages" do
   describe "Home page" do
-    it "should have the content Sample App" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      visit '/static_pages/home'
-      pge.should have_selector("h1", :text => 'Sample App')
-    end
-    it "should have a title" do
-      visit '/static_pages/home'
-      pge.should have_selector("title", :text => 'Home Page')
-    end
+    before {visit root_path}
+
+    it {should have_selector("H1", text:'third App')}
+    it {should have_selector("title", text:'Home Page')}
   end
  describe "Help page" do
-    it "should have the content Help Page" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      visit '/static_pages/help'
-      pge.should have_content("h1", :text => 'Help Page')
-    end
-     it "should have a title" do
-      visit '/static_pages/home'
-      pge.should have_selector("title", :text => 'Home Page')
-    end
+    before {visit help_path}
+
+    it {should have_selector("H1", text:'help page')}
+    it {should have_selector("title", text:'help Page')}
   end
    describe "About Us page" do
-    it "should have the content About us" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      visit '/static_pages/about'
-      pge.should have_content("h1", :text => 'About Us')
-    end
-     it "should have a title" do
-      visit '/static_pages/about'
-      pge.should have_selector("title", :text => 'About Page')
-    end
+      before {visit about_path}
+
+    it {should have_selector("H1", text:'about Us')}
+    it {should have_selector("title", text:'About Us')}
+  end
+  describe "About Us page" do
+      before {visit contact_path}
+
+    it {should have_selector("H1", text:'Contatc Us')}
+    it {should have_selector("title", text:'Contatc Page')}
+  end
+  it "should have the correct links" do
+    visit root_path
+    click_link "About"
+    page.should. have_selelctor 'title', text: 'About us'
+    click_link "Help"
+    page.should. have_selelctor 'title', text: 'Help'
+    click_link "Contact"
+    page.should. have_selelctor 'title', text: 'Contact'
+    click_link "Home"
+    click_link "Sign up Now!"
+    page.should. have_selelctor 'title', text: 'Sign up'
+
   end
 end
+
